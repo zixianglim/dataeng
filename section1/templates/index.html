@@ -5,20 +5,34 @@
 </head>
 <body>
     <h1>Membership Signup Form</h1>
-    <form action="/submit" method="post">
+    <form action="/submit" method="post" enctype="multipart/form-data">
+        <b> Option A: Individual Sign Up </b>
+        <br/>
+        <input type="radio" id="individual_form" name="submission_method" value="form" checked>
+        <label for="individual_form">Individual Form</label><br>
+
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br>
+        <input type="text" id="name" name="name"><br>
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br>
+        <input type="email" id="email" name="email"><br>
 
         <label for="mobile">Mobile:</label>
-        <input type="mobile" id="mobile" name="mobile" required><br>
+        <input type="text" id="mobile" name="mobile"><br>
 
         <label for="dob">Date of Birth:</label>
-        <input type="date" max="3000-01-01" onfocus="this.max=new Date().toISOString().split('T')[0]" name = "dob" required/>
+        <input type="date" max="3000-01-01" onfocus="this.max=new Date().toISOString().split('T')[0]" name = "dob"/>
         <!-- added the max else, chrome will change the width of the box when clicked -->
+        
+        <br/>
+        <br/>
+        <b> Option B: Submit CSV File</b>
+        <br/>
+        <input type="radio" id="upload_csv" name="submission_method" value="csv">
+        <label for="upload_csv">Upload CSV:</label>
+        <input type="file" id="csv" name="csv" accept=".csv"><br>
 
+        <br/>
         <input type="submit" value="Submit">
     </form>
 </body>
