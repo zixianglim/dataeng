@@ -3,11 +3,12 @@ from dateutil.parser import parse
 import hashlib
 import string
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 
 salutations = ['Mr.', 'Mrs.', 'Ms.', 'Dr.', 'Miss.', 'Sir.', 'Madam.', 'Prof.', 'Rev.']
-current_date_hour = datetime.now().strftime('%Y%m%d_%H_%M')
+onehourbefore = datetime.now() - timedelta(hours=1)
+onehourbefore= onehourbefore.strftime('%Y%m%d_%H')
 
 def remove_salutations(name): 
     for salutation in salutations:
@@ -21,9 +22,9 @@ def format_date(date_str): #format date to YYYYMMDD
     except:
         return None
 
-def process_dataset(filepath):
+def process_dataset(df):
 
-    df = pd.read_csv(filepath)
+    initial_rows = len(df)
 
     #drop rows with blank space and NA in name columns
     df = df.dropna(subset=['applicant_name'], how='all', inplace=False)
@@ -57,10 +58,13 @@ def process_dataset(filepath):
     df['age'] = (pd.Timestamp.now() - df['applicant_dob']).dt.days//365 #finding the days between two dates and divide by 365
     df['above_18'] = df['age'] >= 18
 
-    filename = f'./processed_datasets/processed_{current_date_hour}' #temporary naming of file: to edit
+    nomissing = len(df)
+    missing_field = initial_rows - len(df)
+
+    filename = f'./processed_datasets/processed_{onehourbefore}hour.csv' 
     df.to_csv(filename, mode='a', header=not os.path.isfile(filename), index=False)
 
-    return len(df), df
+    return initial_rows, nomissing, missing_field, filename, df
 
 def successful(df):
 
@@ -70,7 +74,9 @@ def successful(df):
     #finally, generate membership ID for those who have passed the above tests
     successful_df.loc[:,'Membership_ID'] = (successful_df['last_name'] + '_' + successful_df['date_of_birth'].apply(lambda dob: hashlib.sha256(dob.encode()).hexdigest()[:5]))
 
-    filename = f'./successful_datasets/success_{current_date_hour}' #temporary naming of file: to edit
+    filename = f'./successful_datasets/success_{onehourbefore}.csv'
     successful_df.to_csv(filename, mode='a', header=not os.path.isfile(filename), index=False)
 
-    return len(successful_df)
+    success_len = len(successful_df)
+
+    return success_len, filename

@@ -3,6 +3,9 @@ import pandas as pd
 import os
 from datetime import datetime
 import uuid
+from cron import cron_job
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
 
 app = Flask(__name__)
 
@@ -48,4 +51,10 @@ def submit():
     return 'Your application is being processed. We will get back to you soon :)'
 
 if __name__ == '__main__':
+
+    scheduler = BackgroundScheduler()
+    trigger = CronTrigger(hour='*', minute = 53)
+    scheduler.add_job(cron_job, trigger)
+    scheduler.start()
+
     app.run(debug=True)
