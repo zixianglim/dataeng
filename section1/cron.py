@@ -29,8 +29,7 @@ def cron_job():
     file_list = [file for file in os.listdir(folder_path) if file.endswith(name)]
 
     if len(file_list) == 0: 
-        summary = f"""
-        no new signup
+        summary = f"""no new signup
         """
     
     else:
