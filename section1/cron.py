@@ -1,7 +1,7 @@
 import os
 import logging
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime
 from process import process_dataset, successful
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -23,9 +23,8 @@ def cron_job():
     current_file_path = os.path.abspath(__file__)
     folder_path = os.path.join(os.path.dirname(current_file_path), 'raw_datasets')
 
-    onehourbefore = datetime.now() - timedelta(hours=1)
-    onehourbefore= onehourbefore.strftime('%Y%m%d_%H')
-    name = f'{onehourbefore}hour.csv'
+    current_date_hour = datetime.now().strftime('%Y%m%d_%H')
+    name = f'{current_date_hour}hour.csv'
 
     file_list = [file for file in os.listdir(folder_path) if file.endswith(name)]
 
@@ -35,8 +34,8 @@ def cron_job():
         df = pd.read_csv(file_path)
         combined_df = pd.concat([combined_df, df], ignore_index=True)
 
-    initial_rows, nomissing, missing_field, filename, df = process_dataset(combined_df)
-    success_len, success_filename = successful(df)
+    initial_rows, nomissing, missing_field, filename, df = process_dataset(combined_df, name)
+    success_len, success_filename = successful(df, name)
     unsuccessful_len = initial_rows - success_len
     percentage = round(success_len/initial_rows*100,2)
     under = unsuccessful_len - missing_field

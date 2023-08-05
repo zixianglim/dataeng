@@ -3,12 +3,10 @@ from dateutil.parser import parse
 import hashlib
 import string
 import re
-from datetime import datetime, timedelta
+from datetime import datetime
 import os
 
 salutations = ['Mr.', 'Mrs.', 'Ms.', 'Dr.', 'Miss.', 'Sir.', 'Madam.', 'Prof.', 'Rev.']
-onehourbefore = datetime.now() - timedelta(hours=1)
-onehourbefore= onehourbefore.strftime('%Y%m%d_%H')
 
 def remove_salutations(name): 
     for salutation in salutations:
@@ -22,7 +20,7 @@ def format_date(date_str): #format date to YYYYMMDD
     except:
         return None
 
-def process_dataset(df):
+def process_dataset(df, name):
 
     initial_rows = len(df)
 
@@ -61,12 +59,12 @@ def process_dataset(df):
     nomissing = len(df)
     missing_field = initial_rows - len(df)
 
-    filename = f'./processed_datasets/processed_{onehourbefore}hour.csv' 
+    filename = f'./processed_datasets/processed_{name}' 
     df.to_csv(filename, mode='a', header=not os.path.isfile(filename), index=False)
 
     return initial_rows, nomissing, missing_field, filename, df
 
-def successful(df):
+def successful(df, name):
 
     successful_df = df[df['above_18']] #only keeping those that are above 18
     successful_df = successful_df[['first_name','last_name','date_of_birth','above_18']] #filter only required columns
@@ -74,7 +72,7 @@ def successful(df):
     #finally, generate membership ID for those who have passed the above tests
     successful_df.loc[:,'Membership_ID'] = (successful_df['last_name'] + '_' + successful_df['date_of_birth'].apply(lambda dob: hashlib.sha256(dob.encode()).hexdigest()[:5]))
 
-    filename = f'./successful_datasets/success_{onehourbefore}.csv'
+    filename = f'./successful_datasets/success_{name}'
     successful_df.to_csv(filename, mode='a', header=not os.path.isfile(filename), index=False)
 
     success_len = len(successful_df)
