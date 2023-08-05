@@ -53,7 +53,7 @@ def submit():
 if __name__ == '__main__':
 
     scheduler = BackgroundScheduler()
-    trigger = CronTrigger(hour='*', minute = '59') #hourly job at e.g 12.59
+    trigger = CronTrigger(hour='*', minute = '59') #hourly job at e.g 12.59, can include: , second='59' for testing etc.
     scheduler.add_job(cron_job, trigger)
     scheduler.start()
 

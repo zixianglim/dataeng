@@ -20,3 +20,14 @@
     - Number of rows with missing fields: 295, 
     - Number of applicants under 18y/o: 62
 
+2023-08-05 22:59:00,042 - INFO -  
+- Number of rows processed: 502
+- Number of rows with proper entries eg no missing fields: 233
+    - Processed file of all applicants with no missing fields: ./processed_datasets/processed_20230805_23hour.csv
+- Successful applications in this month: 27.29%:
+    - Number of successful applications: 137
+    - File with successful applicants: ./successful_datasets/success_20230805_23hour.csv
+- Number of unsuccessful applications: 365, with
+    - Number of rows with missing fields: 269, 
+    - Number of applicants under 18y/o: 96
+
