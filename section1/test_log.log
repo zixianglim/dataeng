@@ -31,3 +31,16 @@
     - Number of rows with missing fields: 269, 
     - Number of applicants under 18y/o: 96
 
+2023-08-06 04:48:20,007 - INFO - no new signup
+
+2023-08-06 04:51:30,047 - INFO -  
+    - Number of rows processed: 2
+    - Number of rows with proper entries eg no missing fields: 2
+        - Processed file of all applicants with no missing fields: ./processed_datasets/processed_20230806_04hour.csv
+    - Successful applications in this month: 100.0%:
+        - Number of successful applications: 2
+        - File with successful applicants: ./successful_datasets/success_20230806_04hour.csv
+    - Number of unsuccessful applications: 0, with
+        - Number of rows with missing fields: 0, 
+        - Number of applicants under 18y/o: 0
+    
