@@ -14,7 +14,7 @@ def index():
 def submit():
     submission_method = request.form['submission_method']
 
-    current_date_hour = datetime.now().strftime('%Y-%m-%d_%H')
+    current_date_hour = datetime.now().strftime('%Y%m%d_%H')
 
     if submission_method == 'form':
         name = request.form['name']
@@ -32,7 +32,7 @@ def submit():
         }
         df = pd.DataFrame(data)
 
-        filename = f'./datasets/member_signup__{current_date_hour}hour.csv'
+        filename = f'./raw_datasets/member_signup_{current_date_hour}hour.csv'
         df.to_csv(filename, mode='a', header=not os.path.isfile(filename), index=False)
             #a new file for each hour irregardless of number of entries
     
