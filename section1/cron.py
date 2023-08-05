@@ -31,7 +31,8 @@ def cron_job():
     if len(file_list) == 0: 
         summary = f"""no new signup
         """
-    
+        do_logging(summary)
+        
     else:
         combined_df = pd.DataFrame()
         for csv_file in file_list:
@@ -57,5 +58,5 @@ def cron_job():
         - Number of applicants under 18y/o: {under}
     """
 
-    do_logging(summary)
+        do_logging(summary)
 
