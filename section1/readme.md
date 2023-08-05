@@ -1,7 +1,9 @@
 **E-commerce Company Product Pipeline**
+
 This repository contains the code for an E-commerce company's product pipeline. The pipeline is designed and implemented to process membership applications submitted by users.
 
 **Requirements**
+
 The pipeline is built with Python and requires the following dependencies:
 - python 3.x
 - pandas
