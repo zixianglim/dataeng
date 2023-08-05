@@ -24,16 +24,18 @@ def process_dataset(df, name):
 
     initial_rows = len(df)
 
-    #drop rows with blank space and NA in name columns
-    df = df.dropna(subset=['applicant_name'], how='all', inplace=False)
-    df = df[df['applicant_name'].str.strip() != '']
-
     #removal of salutations for more accurate retrieval of first and last name
     df.loc[:, 'applicant_name'] = df['applicant_name'].apply(remove_salutations)
 
+    #drop rows with blank space, NA and jus punctuations in name columns
+    df = df.dropna(subset=['applicant_name'], how='all', inplace=False)
+    df = df[df['applicant_name'].str.strip() != '']
+    punctuation_pattern = re.compile(r'^[^\w\s]+$')
+    df = df[~df['applicant_name'].str.match(punctuation_pattern)]
+
     #split and get the first name
     #middle and last name combined by removing all punctuations and spaces
-    name_split = df['applicant_name'].str.split(n=1, expand=True)
+    name_split = df['applicant_name'].str.split(n=1, expand=True)     
     trans = str.maketrans('', '', string.punctuation + ' ')
     df.loc[:, 'first_name'] = name_split[0]
     df.loc[:, 'last_name'] = name_split[1].apply(lambda x: x.translate(trans))
