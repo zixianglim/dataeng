@@ -9,10 +9,11 @@ The pipeline is built with Python and requires the following dependencies:
 - apscheduler
 
 **Pipeline Overview**
-a. It uses the Flask framework to allow users to sign up through a membership form or in this case, to upload a csv file of applicants
-b. Saved these raw files into a folder: raw_datasets
-c. Schedule a job hourly with Cron to process and approve successful applications
-d. Save the processed files into their folders and log the summary into test_log.log
+
+1. It uses the Flask framework to allow users to sign up through a membership form or in this case, to upload a csv file of applicants
+2. Saved these raw files into a folder: raw_datasets
+3. Schedule a job hourly with Cron to process and approve successful applications
+4. Save the processed files into their folders and log the summary into test_log.log
 
 **How to run**
 1. Navigate to the section1 directory: cd ./section1
