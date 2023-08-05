@@ -23,4 +23,4 @@ SET
 WHERE
     manufacturer_id = 'MFG001';
 
-select * from manufacturers where manufacturer_id = 'MFG001'
+SELECT * FROM manufacturers WHERE manufacturer_id = 'MFG001'
