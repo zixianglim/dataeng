@@ -28,29 +28,35 @@ def cron_job():
 
     file_list = [file for file in os.listdir(folder_path) if file.endswith(name)]
 
-    combined_df = pd.DataFrame()
-    for csv_file in file_list:
-        file_path = os.path.join(folder_path, csv_file)
-        df = pd.read_csv(file_path)
-        combined_df = pd.concat([combined_df, df], ignore_index=True)
+    if len(file_list) == 0: 
+        summary = f"""
+        no new signup
+        """
+    
+    else:
+        combined_df = pd.DataFrame()
+        for csv_file in file_list:
+            file_path = os.path.join(folder_path, csv_file)
+            df = pd.read_csv(file_path)
+            combined_df = pd.concat([combined_df, df], ignore_index=True)
 
-    initial_rows, nomissing, missing_field, filename, df = process_dataset(combined_df, name)
-    success_len, success_filename = successful(df, name)
-    unsuccessful_len = initial_rows - success_len
-    percentage = round(success_len/initial_rows*100,2)
-    under = unsuccessful_len - missing_field
+        initial_rows, nomissing, missing_field, filename, df = process_dataset(combined_df, name)
+        success_len, success_filename = successful(df, name)
+        unsuccessful_len = initial_rows - success_len
+        percentage = round(success_len/initial_rows*100,2)
+        under = unsuccessful_len - missing_field
 
-    summary = f""" 
-- Number of rows processed: {initial_rows}
-- Number of rows with proper entries eg no missing fields: {nomissing}
-    - Processed file of all applicants with no missing fields: {filename}
-- Successful applications in this month: {percentage}%:
-    - Number of successful applications: {success_len}
-    - File with successful applicants: {success_filename}
-- Number of unsuccessful applications: {unsuccessful_len}, with
-    - Number of rows with missing fields: {missing_field}, 
-    - Number of applicants under 18y/o: {under}
-"""
+        summary = f""" 
+    - Number of rows processed: {initial_rows}
+    - Number of rows with proper entries eg no missing fields: {nomissing}
+        - Processed file of all applicants with no missing fields: {filename}
+    - Successful applications in this month: {percentage}%:
+        - Number of successful applications: {success_len}
+        - File with successful applicants: {success_filename}
+    - Number of unsuccessful applications: {unsuccessful_len}, with
+        - Number of rows with missing fields: {missing_field}, 
+        - Number of applicants under 18y/o: {under}
+    """
 
     do_logging(summary)
 
