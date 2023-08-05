@@ -92,34 +92,6 @@ iii) Additionally, you are requested to justify your database design by providin
 
 **Please submit the queries for use to satisfy the above scenarios.**
 
-### Option 2
-
-You are tasked to design and create the database system required for analytical use cases. Your users are asked to generate reports that provide a statistical overview of HDB towns in Singapore. The datasets (available on data.gov.sg) required by users are:
-- [List of Resale Flat Prices](https://beta.data.gov.sg/datasets/189/view)
-- [Median Rent by Town and Flay Type](https://beta.data.gov.sg/datasets/156/view)
-- [HDB Property Information](https://beta.data.gov.sg/datasets/150/view)
-- [List of Licensed Supermarkets](https://beta.data.gov.sg/datasets/1565/view)
-- [List of PHPCs under National COVID-19 Vaccine Program](https://beta.data.gov.sg/datasets/501/view)
-
-Some of the use cases the users are required to report on can be:
-- What are the cheapest and most convenient towns to purchase a resale flat? 
-- What are the cheapest and most convenient towns to rent a flat?
-    - Convenience is defined by the number of available supermarkets, hawker centers, and clinics
-- Which towns should be prioritised in building new hawker centers, supermarkets, and clinics?
-
-
-**Note**:
-For convenience of testing, the following constraints are given:
-- Date range can be from January 2022 to December 2022 (inclusive)
-- For questions towards time factors, the column {remaining_lease} can be disregarded. We will only look at the lease by year.
-
-
-i) Draw an entity-relationship diagram to represent the data models required to fulfill the above requirements. **Please submit your design in an image format (e.g. `.jpg`/`.png`)**
-
-ii) You are also tasked to build and deploy your design in i). Set up your database using PostgreSQL with the Docker [image](https://hub.docker.com/_/postgres) provided. **You are required to submit the DDL statements for the tables, and the necessary scripts to deploy the Docker image (minimally a Dockerfile)**.
-
-iii) **Please submit the relevant SQL queries to fulfill the use cases listed above.**
-
 ## Section 3: System Design
 
 You are given the role of the `Tech Lead` of a project for a company whose main business is in processing sensor data and ground surveys. 
