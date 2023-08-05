@@ -1,0 +1,56 @@
+Test Plan for E-commerce Company Product Pipeline
+
+1. Input Data Test:
+   - Test with a dataset containing no records to ensure graceful handling of empty input.
+   - Test with datasets containing invalid columns or missing required fields for error handling.
+
+2. Data Processing Test:
+   - Test with datasets containing successful and unsuccessful applications.
+   - Verify pipeline processes data, removes rows without names, and calculates the above_18 field accurately.
+   - Ensure the pipeline generates membership IDs as per the specified format.
+
+3. Validity Check Test:
+   - Test with datasets containing invalid mobile numbers, email addresses, and birthdates for rejection.
+   - Test with applicants whose age is less than 18 years for unsuccessful applications.
+
+4. Batching and Scheduling Test:
+   - Schedule the pipeline to run hourly using cron or Airflow.
+   - Test with datasets of varying sizes to ensure correct batching.
+
+5. Summary Notification Test:
+   - Verify summary notification contains correct details: rows processed, successful applications, unsuccessful applications, and any additional data quality metrics.
+
+6. Data Organization Test:
+   - Check output folder for processed datasets to ensure correct organization and naming.
+
+7. Performance and Scalability Test:
+   - Test pipeline performance with large datasets for scalability assessment.
+   - Evaluate processing time and resource utilization.
+
+8. Error Handling Test:
+   - Introduce errors (e.g., file permission issues) to ensure graceful handling and meaningful error messages.
+
+9. Recovery Test:
+   - Simulate pipeline failure and check recovery when run again.
+
+10. Edge Cases Test:
+    - Test with boundary cases (e.g., applicants turning 18 on the application date) to verify accuracy.
+
+11. Data Retention Test:
+    - Test pipeline behavior with overlapping data or potential duplicates.
+
+12. Long-Running Test:
+    - Run the pipeline continuously for an extended period to assess stability.
+
+13. Concurrent Test:
+    - Simulate multiple instances running concurrently to ensure no interference.
+
+14. Regression Test:
+    - Repeat all previous test cases after making changes to ensure no new issues.
+
+15. Logging and Monitoring Test:
+    - Check pipeline logging and set up monitoring for performance tracking.
+
+*Document test cases, expected results, and actual results for each test. 
+*Address any issues discovered during testing and retest to ensure resolution.
+
