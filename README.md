@@ -1,29 +1,9 @@
-# Data Engineer Tech Challenge TAP -2023
-
-This test is split into 4 sections
+This project has 4 sections.
 
 1. **data pipelines**
 2. **databases**
 3. **system design**
 4. **presentation**
-
-## Submission Guidelines
-
-Please create a **private** Github repository containing your submission and send us an email containing a link to the repository. Do note to add the Github handles in the email you've received as collaborators. 
-
-Dos:
-
-- Frequent commits
-- Descriptive commit messages
-- Clear documentation
-- Comments in your code
-
-Don'ts:
-
-- Only one commit containing all the files
-- Submitting a zip file
-- Sparse or absent documentation
-- Code which is hard to read
 
 ## Section 1: Data Pipelines
 
